@@ -39,18 +39,6 @@
         <url-pattern>/contact</url-pattern>
     </servlet-mapping>
 
-    <!-- Assignment Servlet -->
-    <servlet>
-        <servlet-name>AssignmentServlet</servlet-name>
-        <servlet-class>com.portfolio.servlet.AssignmentServlet</servlet-class>
-        <load-on-startup>2</load-on-startup>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>AssignmentServlet</servlet-name>
-        <url-pattern>/assignment/*</url-pattern>
-    </servlet-mapping>
-
     <!-- Admin Panel Servlet -->
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
