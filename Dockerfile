@@ -1,8 +1,11 @@
 # Dockerfile for Render deployment
-FROM maven:3.8.6-openjdk-11 AS build
+FROM maven:3.9.4-openjdk-17 AS build
 
 # Set working directory
 WORKDIR /app
+
+# Set Maven options for better memory management
+ENV MAVEN_OPTS="-Xmx1024m -Xms512m"
 
 # Copy pom.xml and download dependencies
 COPY pom.xml .
@@ -11,11 +14,14 @@ RUN mvn dependency:go-offline -B
 # Copy source code
 COPY src ./src
 
+# Create data directory
+RUN mkdir -p data
+
 # Build the application
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests --batch-mode --no-transfer-progress
 
 # Runtime stage
-FROM tomcat:9.0-jdk11-openjdk-slim
+FROM tomcat:9.0-jdk17-openjdk-slim
 
 # Remove default webapps
 RUN rm -rf /usr/local/tomcat/webapps/*
