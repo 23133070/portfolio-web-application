@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: portfolio-web
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: JAVA_OPTS
+        value: "-Xmx512m -Xms256m"
+      - key: PORT
+        value: "8080"
+    healthCheckPath: /
